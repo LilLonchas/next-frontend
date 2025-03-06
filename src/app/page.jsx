@@ -1,10 +1,9 @@
-import Navbar from './Navbar/Navbar';  // Importa el Navbar
-
+// app/page.js (o cualquier página como profile/page.js)
 export default function Home() {
   return (
     <div>
-      <Navbar />
-      <h1 className="text-4xl text-center mt-10">Bienvenido a la Página Principal</h1>
+      <h1>Bienvenido a la tienda</h1>
+      {/* El contenido específico de la página */}
     </div>
   );
 }

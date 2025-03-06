@@ -1,48 +1,41 @@
 'use client';
-
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [cartItems, setCartItems] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
-    // Comprobar si el usuario está autenticado (usando localStorage como ejemplo)
     const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-
-    // Obtener el número de productos en el carrito (simulado con localStorage)
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(cart.length);
+    setIsAuthenticated(!!token);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    router.push('/login');
+  };
 
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo y enlaces principales */}
-        <div>
-          <Link href="/" className="text-xl font-bold">Mi Tienda</Link>
-        </div>
+        <Link href="/" className="text-xl font-bold">Mi Tienda</Link>
 
-        {/* Enlaces de navegación */}
         <div className="space-x-4">
-          <Link href="/products" className="hover:text-gray-300">Productos</Link>
+          <Link href="/pages" className="hover:text-gray-300">Productos</Link>
           {isAuthenticated ? (
             <>
-              <span className="hover:text-gray-300">Hola, Usuario</span>
-              <Link href="/logout" className="hover:text-gray-300">Cerrar sesión</Link>
+              <Link href="/profile" className="hover:text-gray-300">Mi Perfil</Link>
+              <button onClick={handleLogout} className="hover:text-gray-300">Cerrar sesión</button>
             </>
           ) : (
-            <Link href="/login" className="hover:text-gray-300">Iniciar sesión</Link>
+            <>
+              <Link href="/login" className="hover:text-gray-300">Iniciar sesión</Link>
+              <Link href="/register" className="hover:text-gray-300">Registrarse</Link> {/* Aquí agregamos el botón de registro */}
+            </>
           )}
-          <Link href="/cart" className="hover:text-gray-300">
-            Carrito ({cartItems})
-          </Link>
         </div>
       </div>
     </nav>
