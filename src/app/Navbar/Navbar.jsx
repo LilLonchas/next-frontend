@@ -24,7 +24,7 @@ export default function Navbar() {
         <Link href="/" className="text-xl font-bold">Mi Tienda</Link>
 
         <div className="space-x-4">
-          <Link href="/pages" className="hover:text-gray-300">Productos</Link>
+          <Link href="/products" className="hover:text-gray-300">Productos</Link>
           {isAuthenticated ? (
             <>
               <Link href="/profile" className="hover:text-gray-300">Mi Perfil</Link>
