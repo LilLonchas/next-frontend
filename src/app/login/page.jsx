@@ -1,14 +1,18 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../contexts/authContext';  // Importamos el hook para acceder al contexto
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth(); // Accedemos a la función login del contexto
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Llamada a la API para verificar las credenciales del usuario
     const response = await fetch('http://localhost:3001/user/login', {
       method: 'POST',
       headers: {
@@ -18,9 +22,13 @@ export default function Login() {
     });
 
     const data = await response.json();
+
     if (data.access_token) {
-      localStorage.setItem('token', data.access_token);
-      router.push('/'); // Redirigir al perfil después de iniciar sesión
+      // Usamos el método login del contexto para autenticar al usuario
+      login(data.access_token, username);
+
+      // Redirigir a la página principal
+      router.push('/');
     } else {
       alert('Credenciales incorrectas');
     }

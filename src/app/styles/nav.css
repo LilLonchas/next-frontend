@@ -1,0 +1,59 @@
+/* navbar.css */
+
+/* Contenedor principal del nav */
+.navbar {
+  background-color: #333;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+/* Contenedor que agrupa el logo y los links */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* Links de navegación */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Cada item de navegación */
+.navbar-item {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect para los items */
+.navbar-item:hover {
+  background-color: #444;
+  border-radius: 5px;
+}
+
+/* Si está autenticado, el 'usuario' se mueve a la derecha */
+.navbar-links-right {
+  margin-left: auto;  /* Esto empuja los elementos a la derecha */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

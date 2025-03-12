@@ -1,9 +1,11 @@
 // app/layout.js
 import Navbar from './Navbar/Navbar'; // Importa el Navbar
 import './styles/global.css';  // Si tienes estilos globales
+import { AuthProvider } from './contexts/authContext';
 
 export default function Layout({ children }) {
   return (
+    <AuthProvider>
     <html lang="es">
       <head>
         {/* Aquí puedes agregar meta tags, títulos, etc. */}
@@ -16,5 +18,6 @@ export default function Layout({ children }) {
         <main>{children}</main>
       </body>
     </html>
+    </AuthProvider>
   );
 }
