@@ -1,16 +1,27 @@
-// app/layout.jsx
+// app/layout.js
+import Navbar from './Navbar/Navbar'; // Importa el Navbar
+import './styles/global.css';  // Si tienes estilos globales
+import { AuthProvider } from './contexts/authContext';
 
-import './styles/global.css';
-
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
+    <AuthProvider>
     <html lang="es">
       <head>
-        {/* Metadatos, etc. */}
+        {/* Aquí puedes agregar meta tags, títulos, etc. */}
       </head>
       <body>
-        {children}
+        {/* Navbar siempre visible */}
+        <Navbar />
+        
+        {/* El contenido de la página actual se renderiza aquí */}
+        <main>{children}</main>
       </body>
+      <footer>
+        {/* Puedes agregar un footer aquí */}
+        <h1>© 2025 Ruben Juan Fredi</h1>
+      </footer>
     </html>
+    </AuthProvider>
   );
 }
