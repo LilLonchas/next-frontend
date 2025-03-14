@@ -2,68 +2,88 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import '../styles/productos.css';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);  // Para mostrar un loading mientras se obtienen los productos
-  const [error, setError] = useState(null); // Para manejar posibles errores
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    // Función para obtener los productos
     const fetchProducts = async () => {
       try {
-        // Obtener el token de localStorage
         const token = localStorage.getItem('token');
-        
-        if (!token) {
-          throw new Error('No se encuentra el token de autenticación');
-        }
+        if (!token) throw new Error('No se encuentra el token de autenticación');
 
-        // Realizar la solicitud GET con el token en los encabezados
         const response = await fetch('http://localhost:3001/products', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,  // Enviar el token en los encabezados
+            'Authorization': `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error HTTP! Status: ${response.status}`);
 
         const data = await response.json();
-        setProducts(data);  // Guardar los productos en el estado
-        setLoading(false);   // Dejar de mostrar el loading
+        setProducts(data);
+        setLoading(false);
       } catch (err) {
-        setError('Error al cargar los productos');
-        setLoading(false);   // Dejar de mostrar el loading en caso de error
-        console.error('Fetch error:', err); // Mostrar el error en la consola
+        setError('Por motivos de seguridad, tendrás que registrarte en nuestra página para poder ver nuestros productos');
+        setLoading(false);
+        console.error('Fetch error:', err);
       }
     };
 
-    fetchProducts(); // Llamar a la función para obtener los productos
+    fetchProducts();
   }, []);
 
-  if (loading) {
-    return <p>Cargando productos...</p>; // Mensaje mientras se cargan los productos
-  }
+  const handleAddToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  if (error) {
-    return <p>{error}</p>; // Mostrar el error si ocurre alguno
-  }
+    // Comprobamos si el producto ya está en el carrito
+    const existingProduct = cart.find((item) => item.id === product.id);
+
+    if (!existingProduct) {
+      cart.push({ ...product, quantity: 1 });  // Si no está, lo añadimos
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${product.name} añadido al carrito`);
+    } else {
+      alert(`${product.name} ya está en el carrito.`);
+    }
+
+    // Actualizamos el contador del carrito en localStorage y en Navbar
+    const updatedCartCount = cart.length;
+    localStorage.setItem('cartCount', updatedCartCount);
+  };
+
+  if (loading) return <p>Cargando productos...</p>;
+  if (error) return <p className="error-message">{error}</p>;
 
   return (
-    <div>
+    <div className="products-container">
       <h1>Productos</h1>
-      <div>
+      <div className="products-grid">
         {products.length > 0 ? (
           products.map((product) => (
-            <div key={product.id}>
+            <div key={product.id} className="product-card">
+              <img
+                src={product.image || '/images/default-product.jpg'}
+                alt={product.name}
+                className="product-image"
+              />
               <h2>{product.name}</h2>
               <p>{product.description}</p>
               <p>${product.price}</p>
+              <div className="product-buttons">
+                <button onClick={() => router.push(`/product/${product.id}`)}>
+                  Ver Detalles
+                </button>
+                <button onClick={() => handleAddToCart(product)}>
+                  Añadir al Carrito
+                </button>
+              </div>
             </div>
           ))
         ) : (

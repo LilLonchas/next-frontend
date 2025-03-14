@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import '../styles/register.css';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -38,7 +39,6 @@ export default function Register() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-80">
-        <h2 className="text-2xl font-bold mb-4">Registro</h2>
         
         {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 

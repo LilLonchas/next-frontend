@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import '../styles/profile.css';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -30,7 +31,7 @@ export default function Profile() {
   if (!user) return <p>Cargando...</p>;
 
   return (
-    <div>
+    <div className="container">
       <h1>Perfil de {user.username}</h1>
       <button onClick={() => {
         localStorage.removeItem('token');

@@ -2,12 +2,12 @@
 
 /* Contenedor principal del nav */
 .navbar {
-  background-color: #333;
+  background-color: #1C3144;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 /* Contenedor que agrupa el logo y los links */
@@ -23,8 +23,13 @@
 .navbar-logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
+}
+.navbar img{
+  width: 100%;
+  height: 5em;
+  border-radius: 70%;
 }
 
 /* Links de navegación */
@@ -36,7 +41,7 @@
 
 /* Cada item de navegación */
 .navbar-item {
-  color: white;
+  color: rgb(250, 250, 250);
   text-decoration: none;
   font-size: 1rem;
   padding: 5px 10px;
@@ -46,8 +51,9 @@
 
 /* Hover effect para los items */
 .navbar-item:hover {
-  background-color: #444;
+  background-color: #2e768a;
   border-radius: 5px;
+  transition: all 0.5s ease;
 }
 
 /* Si está autenticado, el 'usuario' se mueve a la derecha */
@@ -56,4 +62,10 @@
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+button{
+  background-color: #2e768a17;
+  border-style: dotted;
+  border-radius: 30%;
 }

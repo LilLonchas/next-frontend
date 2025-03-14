@@ -1,0 +1,49 @@
+nav {
+    background-color: #1f2937;
+    color: white;
+    padding: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #2B2C28;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+nav button:hover {
+    color: #d1d5db;
+}
+
+.space-x-4 > * {
+    margin-right: 16px;
+}
+
+.space-x-4 > *:last-child {
+    margin-right: 0;
+}
+nav img{
+    width: 20%;
+    height: 8em;
+}
