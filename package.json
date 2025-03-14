@@ -11,8 +11,12 @@
   "dependencies": {
     "force": "^0.0.3",
     "next": "15.2.1",
+    "har-validator": "^5.1.5",
+    "lucide-react": "^0.479.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "request": "^2.88.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
