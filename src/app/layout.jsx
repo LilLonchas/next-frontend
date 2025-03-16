@@ -16,11 +16,13 @@ export default function Layout({ children }) {
         
         {/* El contenido de la página actual se renderiza aquí */}
         <main>{children}</main>
-      </body>
+        
       <footer>
         {/* Puedes agregar un footer aquí */}
         <h1>© 2025 Ruben Juan Fredi</h1>
       </footer>
+      
+      </body>
     </html>
     </AuthProvider>
   );
